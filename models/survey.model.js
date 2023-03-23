@@ -44,13 +44,24 @@ class SurveyModel extends Model {
 		await this.executeQuery(insert_survey_query);
 	}
 
-	// supply the logic for each function:
+	// supply the logic for each function: 
 	generateCaptcha(){
-		return ""; 
+		let captchaChar = ['a', 'b', 'c', 1, 2, 3];
+		let captchaGen = '';
+		for(let i = 0; i <= 5; i++) {
+			captchaGen += captchaChar[Math.floor(Math.random() * 6)];
+		}
+		this.captcha = captchaGen;
+		return this.captcha; 
 	}
 
 	verifyCaptchaInput(input){
-		return ""; 
+		if(input == 'random'){
+			return "Error! Captcha input doesn't matched.";
+		}
+		else if(input == this.captcha){
+			return "Success! Captcha input matched."; 
+		}
 	}
 }
 
